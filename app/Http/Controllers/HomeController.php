@@ -61,12 +61,13 @@ class HomeController extends Controller
         
         $buku = DB::connection('mysql')
         ->table('buku')
-        ->select('buku.*')
-        ->where('id', '=', $id)
+        ->select('buku.*','users.name as pengguna' )
+        ->join('users','users.id','=','buku.id_user')
+        ->where('buku.id', '=', $id)
         ->get();
 
         $buku = json_decode($buku, true);
-        // dd($buku);
+        // dd($buku, $id);
 
         return view('detail/detailbuku', ['id' => $id, 'buku' => $buku] );
 

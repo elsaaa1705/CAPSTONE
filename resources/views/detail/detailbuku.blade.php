@@ -15,21 +15,66 @@
 					<div class="details col-md-6">
 						<h3 class="product-title">{{$buku[0]['judul']}}</h3>
 						<p class="product-description">{{$buku[0]['deskripsi_buku']}}</p>
-						<h4 class="price">Nama Pemilik : <span>{{$buku[0][id_]}}</span></h4>
-						<p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
-						<h5 class="colors">colors:
-							<span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
-							<span class="color green"></span>
-							<span class="color blue"></span>
-						</h5>
+						<h4 class="price">Nama Pemilik : <span>{{$buku[0]['pengguna']}}</span></h4>
+						<p> Kategori : <span>{{$buku[0]['kategori']}}</span></p>
+						<p> Penerbit : <span>{{$buku[0]['penerbit']}}</span></p>
+						<p> Tahun Terbit : <span>{{$buku[0]['tahun_terbit']}}</span></p>
 						<div class="action">
-							<button class="add-to-cart btn btn-default" type="button"> Pinjam Buku </button>
-							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+							<button id="pinjam" class="add-to-cart btn btn-default" type="button"> Pinjam Buku </button>
 						</div>
+							<label for="datetimeInput">Pilih Tanggal Pinjam:</label>
+							<input type="date" id="tanggalpinjam" name="datetimeInput">
+							<input type="hidden" value="{{$buku[0]['id']}}">
+							<input type="hidden" value="{{$buku[0]['id_user']}}">
+							<input type="hidden" value="{{ Auth::user()->id }}}">
+							<br>
+							<label for="datetimeInput">Pilih Tanggal Kembalikan:</label>
+							<input type="date" id="tanggalkembali" name="datetimeInput">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<script>
+    $("#save").click(function(){
+        console.log("tes")
+        var nama = $("#namauser").val()
+        var tglpinjam = $("#tanggalpinjam").val()
+        var judul = $("#judulbuku").val()
+        var tglkembali = $("#tanggalkembali").val()
+        // console.log(nama)
+        // console.log(tglpinjam)
+        // console.log(judul)
+        // console.log(tglkembali)
+
+        var _token = $('input[name="_token"]').val();
+
+        $.ajax({
+            url: "{{ route('pinjam') }}",
+            method: "get",
+            data: {
+                _token: _token,
+                nama: nama,
+                tglpinjaman: tglpinjam,
+                getjudul: judul,
+                getkembali: tglkembali
+            },
+            success: function(result) {
+             if(result.status === 'sukses') {
+                console.log('data berhasil update')
+             location.reload()
+            }
+             else {
+                console.log('gagal')
+             }
+            
+
+            }
+
+        });
+        
+    })
+</script>
 
 @endsection
