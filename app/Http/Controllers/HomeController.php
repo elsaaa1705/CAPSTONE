@@ -58,7 +58,17 @@ class HomeController extends Controller
     }
 
     public function detail($id) {
-        return view('detail/detailbuku', ['id' => $id] );
+        
+        $buku = DB::connection('mysql')
+        ->table('buku')
+        ->select('buku.*')
+        ->where('id', '=', $id)
+        ->get();
+
+        $buku = json_decode($buku, true);
+        // dd($buku);
+
+        return view('detail/detailbuku', ['id' => $id, 'buku' => $buku] );
 
     }
 }
