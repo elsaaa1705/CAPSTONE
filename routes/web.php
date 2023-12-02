@@ -15,7 +15,6 @@ use App\Http\Controllers\notifikasiController;
 */
 
 
-
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
@@ -23,4 +22,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('da
 Route::get('/detail/{id}', [App\Http\Controllers\HomeController::class, 'detail'])->name('detail');
 
 Route::get('/pinjam', [App\Http\Controllers\HomeController::class, 'pinjam'])->name('pinjam');
+
+// ...
+
+
 

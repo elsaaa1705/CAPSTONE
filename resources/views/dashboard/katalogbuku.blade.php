@@ -2,14 +2,14 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <p class="text-center">List Buku Terbaru Minggu Ini</p>
+    <p class="text-center">Daftar Buku Terbaru Minggu Ini</p>
     @foreach ($features as $key => $items)
     <div class="card" style="width:400px;margin:10px">
-    <img class="card-img-top" src="{{ asset('img/' . $items['img']) }}" style="height: 200px; width: auto;" alt="Card image">
+    <img class="card-img-top" src="{{ asset('img/' . $items['img']) }}" style="height: 200px; width: auto; display: block; margin: 0 auto;" alt="Card image">
         <div class="card-body">
             <h4 class="card-title">{{$items['judul']}}</h4>
             <p class="card-text">{{$items['kategori']}}</p>
-            <a href="/detail/{{$items['id']}}" target="_blank" class="btn btn-primary">Liat Buku</a>
+            <a href="/detail/{{$items['id']}}" target="_blank" class="btn btn-primary">Detail Buku</a>
         </div>
     </div>
     @endforeach
@@ -48,10 +48,7 @@
                 title: 'Penerbit',
                 data: 'penerbit'
             },
-            {
-                title: 'Aksi',
-                data: 'penerbit'
-            },
+           
             {
                 title: 'Actions',
                 render: function(data, type, row, meta) {
