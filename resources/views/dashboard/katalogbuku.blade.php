@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <p class="text-center">List Terbaru minggu ini</p>
+    <p class="text-center">List Buku Terbaru Minggu Ini</p>
     @foreach ($features as $key => $items)
     <div class="card" style="width:400px;margin:10px">
-        <img class="card-img-top" src="{{asset('img/filosofi_teras.png')}}" style="height: 200px;width:auto" alt="Card image">
+    <img class="card-img-top" src="{{ asset('img/' . $items['img']) }}" style="height: 200px; width: auto;" alt="Card image">
         <div class="card-body">
             <h4 class="card-title">{{$items['judul']}}</h4>
             <p class="card-text">{{$items['kategori']}}</p>

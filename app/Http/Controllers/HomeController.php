@@ -72,4 +72,30 @@ class HomeController extends Controller
         return view('detail/detailbuku', ['id' => $id, 'buku' => $buku] );
 
     }
+
+    public function pinjam(Request $request) {
+        $idbuku = $request -> input('idbuku');
+        $idpemilik = $request -> input('idpemilik');
+        $idpeminjam = $request -> input('idpeminjam');
+        $tglpinjam = $request -> input('tglpinjam');
+        $tglkembali = $request -> input('tglkembali');
+
+        DB::connection('mysql')
+        ->table('notifikasi')
+        ->insert([
+            'id_peminjam' => $idpeminjam,
+            'id_buku' => $idbuku,
+            'id_pemilik' => $idpemilik,
+            'status_pinjam' => 'tidak dipinjam',
+            'status_transaksi' => 'belum selesai',
+            'waktu_pinjam' => $tglpinjam,
+            'waktu_kembali' => $tglkembali
+        ]);
+
+        return response()->json(['status'=>'sukses']);
+
+        // dd($idbuku);
+    }
+
+
 }

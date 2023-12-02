@@ -1,15 +1,15 @@
 @extends('dashboard.dashboard')
 
 @section('content')
-	<div class="container">
-		<div class="card">
+
 			<div class="container-fliud">
 				<div class="wrapper row">
 					<div class="preview col-md-6">
 						
-                    <div class="tab-pane active" id="pic-1">
-                        <img src="{{ asset('img/' . $buku[0]['img']) }}" />
-                   </div>
+                    <div class="tab-pane active d-flex justify-content-center" id="pic-1">
+                        <img style="height: 400px; width:300px;" src="{{ asset('img/' . $buku[0]['img']) }}" />
+                    </div>
+
 
 					</div>
 					<div class="details col-md-6">
@@ -24,9 +24,9 @@
 						</div>
 							<label for="datetimeInput">Pilih Tanggal Pinjam:</label>
 							<input type="date" id="tanggalpinjam" name="datetimeInput">
-							<input type="hidden" value="{{$buku[0]['id']}}">
-							<input type="hidden" value="{{$buku[0]['id_user']}}">
-							<input type="hidden" value="{{ Auth::user()->id }}}">
+							<input type="hidden" id="idbuku" value="{{$buku[0]['id']}}">
+							<input type="hidden" id="idpemilik" value="{{$buku[0]['id_user']}}">
+							<input type="hidden" id="idpeminjam" value="{{ Auth::user()->id }}">
 							<br>
 							<label for="datetimeInput">Pilih Tanggal Kembalikan:</label>
 							<input type="date" id="tanggalkembali" name="datetimeInput">
@@ -36,38 +36,57 @@
 		</div>
 	</div>
 
+    
 	<script>
-    $("#save").click(function(){
+    $("#pinjam").click(function(){
         console.log("tes")
-        var nama = $("#namauser").val()
-        var tglpinjam = $("#tanggalpinjam").val()
-        var judul = $("#judulbuku").val()
-        var tglkembali = $("#tanggalkembali").val()
-        // console.log(nama)
-        // console.log(tglpinjam)
-        // console.log(judul)
-        // console.log(tglkembali)
+        var id_buku = $("#idbuku").val()
+        var id_pemilik = $("#idpemilik").val()
+        var id_peminjam = $("#idpeminjam").val()
+        var tgl_pinjam = $("#tanggalpinjam").val()
+        var tgl_kembali = $("#tanggalkembali").val()
 
         var _token = $('input[name="_token"]').val();
 
         $.ajax({
-            url: "{{ route('pinjam') }}",
+          url: "{{ route('pinjam') }}",
             method: "get",
             data: {
                 _token: _token,
-                nama: nama,
-                tglpinjaman: tglpinjam,
-                getjudul: judul,
-                getkembali: tglkembali
+                idbuku: id_buku,
+                idpemilik: id_pemilik,
+                idpeminjam: id_peminjam,
+                tglpinjam: tgl_pinjam,
+                tglkembali: tgl_kembali
+
             },
-            success: function(result) {
-             if(result.status === 'sukses') {
-                console.log('data berhasil update')
-             location.reload()
-            }
-             else {
-                console.log('gagal')
-             }
+            success: function(response) {
+                if (response.status === "sukses") {
+                    Swal.fire({
+  title: "Buku Berhasil dipinjam, silahkan tunggu konfirmasi",
+  showClass: {
+    popup: `
+      animate__animated
+      animate__fadeInUp
+      animate__faster
+    `
+  },
+  hideClass: {
+    popup: `
+      animate__animated
+      animate__fadeOutDown
+      animate__faster
+    `
+  }
+});
+
+window.location.href = '/';
+                    console.log("Data Berhasil dimasukkan")
+                }
+                else {
+                    console.log("Error")
+                }
+
             
 
             }

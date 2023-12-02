@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\notifikasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 Route::get('/detail/{id}', [App\Http\Controllers\HomeController::class, 'detail'])->name('detail');
+
+Route::get('/pinjam', [App\Http\Controllers\HomeController::class, 'pinjam'])->name('pinjam');
+
+Route::get('/', [App\Http\Controllers\notifikasiController::class, 'index'])->name('tes');
+
