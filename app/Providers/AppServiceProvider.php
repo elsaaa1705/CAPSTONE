@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
+// use auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,8 +21,28 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
-        //
+
+
+        // View::composer('dashboard.dashboard', function ($view) {
+        //     $angka = 0; // Set your value here, or fetch it from wherever you want
+        //     $view->with('angka', $angka);
+        // });
+
+        View::composer('*', function ($view) {
+            if (Auth::check()) {
+                $userId = Auth::user()->id;
+
+                $getnotif = DB::connection('mysql')
+                    ->table('notifikasi')
+                    ->where('id_pemilik', $userId)
+                    ->count();
+
+
+
+                $view->with('angka', $getnotif);
+            }
+        });
     }
 }
