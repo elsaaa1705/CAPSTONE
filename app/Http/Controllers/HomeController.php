@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -39,6 +40,7 @@ class HomeController extends Controller
             ->table('buku')
             ->select('buku.*')
             ->where('status_buku', 0)
+            ->where('id_user','!=',Auth::user()->id)
             ->whereBetween('upload_date', [$startOfWeek, $endOfWeek])
             ->get();
 
