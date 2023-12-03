@@ -38,6 +38,7 @@ class HomeController extends Controller
         $features = DB::connection('mysql')
             ->table('buku')
             ->select('buku.*')
+            ->where('status_buku', 0)
             ->whereBetween('upload_date', [$startOfWeek, $endOfWeek])
             ->get();
 

@@ -37,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
                 $getnotif = DB::connection('mysql')
                     ->table('notifikasi')
                     ->where('id_pemilik', $userId)
+                    ->where('status_transaksi','=','belum selesai')
                     ->count();
 
 

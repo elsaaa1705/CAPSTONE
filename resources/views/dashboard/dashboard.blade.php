@@ -120,14 +120,14 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-                                @if ($angka > 1)
+                                @if ($angka > 0)
                                 <i class="mdi mdi-bell font-24" style="color: red;"></i>
                                 @else
                                 <i class="mdi mdi-bell font-24"></i>
                                 @endif
                             </a>
                             <ul class=" dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Request Pinjaman <span> {{ $angka }}</span> </a></li>
+                                <li><a class="dropdown-item" href="{{ route('notifikasi') }}">Request Pinjaman <span> {{ $angka }}</span> </a></li>
                                 <li><a class="dropdown-item" href="#">Notifikasi Buku</a></li>
                                 <li>
                                     <hr class="dropdown-divider" />

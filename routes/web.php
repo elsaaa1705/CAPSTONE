@@ -23,6 +23,11 @@ Route::get('/detail/{id}', [App\Http\Controllers\HomeController::class, 'detail'
 
 Route::get('/pinjam', [App\Http\Controllers\HomeController::class, 'pinjam'])->name('pinjam');
 
+Route::get('/notifikasi', [App\Http\Controllers\notifikasiController::class, 'index'])->name('notifikasi');
+
+Route::get('/konfirmation', [App\Http\Controllers\notifikasiController::class, 'konfirmasi'])->name('konfirmasi');
+
+
 // ...
 
 
