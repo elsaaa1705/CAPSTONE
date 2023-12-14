@@ -18,6 +18,8 @@ use App\Http\Controllers\ProfileController;
 
 Auth::routes();
 
+Route::get('/', function () { return redirect()->route('login');});
+
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 Route::get('/detail/{id}', [App\Http\Controllers\HomeController::class, 'detail'])->name('detail');
