@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\notifikasiController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use App\Http\Controllers\notifikasiController;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 Route::get('/detail/{id}', [App\Http\Controllers\HomeController::class, 'detail'])->name('detail');
 
@@ -26,6 +27,8 @@ Route::get('/pinjam', [App\Http\Controllers\HomeController::class, 'pinjam'])->n
 Route::get('/notifikasi', [App\Http\Controllers\notifikasiController::class, 'index'])->name('notifikasi');
 
 Route::get('/konfirmation', [App\Http\Controllers\notifikasiController::class, 'konfirmasi'])->name('konfirmasi');
+
+Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile.show');
 
 
 // ...

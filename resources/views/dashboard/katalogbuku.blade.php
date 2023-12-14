@@ -29,41 +29,39 @@
 <script>
     var buku = <?php echo json_encode($buku); ?>;
 
-    // console.log(buku);
-
-    var dataBuku = $('#buku').DataTable({
-        columns: [{
-                title: 'ID',
-                data: 'id'
-            },
-            {
-                title: 'Judul',
-                data: 'judul'
-            },
-            {
-                title: 'Tahun Terbit',
-                data: 'tahun_terbit'
-            },
-            {
-                title: 'Penerbit',
-                data: 'penerbit'
-            },
-           
-            {
-                title: 'Actions',
-                render: function(data, type, row, meta) {
-                    var buttons =
-                        '<form action="/detail/' + row.id + '" method="GET" class="form-inline" style="display: inline;" target="_blank">' +
-                        '<button class="button button-green">Pinjam Buku</button>' +
-                        '</form>';
-                    return buttons;
-
-                }
+var dataBuku = $('#buku').DataTable({
+    columns: [
+        {
+            title: 'ID',
+            data: 'id'
+        },
+        {
+            title: 'Judul',
+            data: 'judul'
+        },
+        {
+            title: 'Tahun Terbit',
+            data: 'tahun_terbit'
+        },
+        {
+            title: 'Penerbit',
+            data: 'penerbit'
+        },
+        {
+            title: 'Actions',
+            render: function(data, type, row, meta) {
+                var buttons =
+                    '<form action="/detail/' + row.id + '" method="GET" class="form-inline" style="display: inline;" target="_blank">' +
+                    '<button class="button button-green">Pinjam Buku</button>' +
+                    '</form>';
+                return buttons;
             }
-        ],
-    });
+        }
+    ],
+});
 
-    dataBuku.clear().rows.add(buku).draw();
+dataBuku.clear().rows.add(buku).draw();
+
 </script>
 
 @endsection
