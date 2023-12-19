@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\notifikasiController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\uploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,9 @@ use App\Http\Controllers\ProfileController;
 
 Auth::routes();
 
-Route::get('/', function () { return redirect()->route('login');});
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
@@ -33,7 +36,8 @@ Route::get('/konfirmation', [App\Http\Controllers\notifikasiController::class, '
 Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile.show');
 
 
+Route::get('/uploadbuku', [uploadController::class, 'index'])->name('uploadbuku');
+Route::post('/sendbuku', [uploadController::class, 'getUpload'])->name('sendbuku');
+
+
 // ...
-
-
-
